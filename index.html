@@ -1115,31 +1115,41 @@
           }
         }
 
-        for (
-          let bulletIndex = bullets.length - 1;
-          bulletIndex >= 0;
-          bulletIndex--
-        ) {
-          const bullet = bullets[bulletIndex];
+      for (
+        let bulletIndex = bullets.length - 1;
+        bulletIndex >= 0;
+        bulletIndex--
+      ) {
+        const bullet = bullets[bulletIndex];
 
-          if (
-            circleCollision(
-              player.x,
-              player.y,
-              player.radius * 0.36,
-              bullet.x,
-              bullet.y,
-              bullet.radius * 0.52
-            )
-          ) {
-            bullets.splice(
-              bulletIndex,
-              1
-            );
-
-            damagePlayer();
-          }
+        if (!bullet) {
+          continue;
         }
+
+        if (
+          circleCollision(
+            player.x,
+            player.y,
+            player.radius * 0.36,
+            bullet.x,
+            bullet.y,
+            bullet.radius * 0.52
+          )
+        ) {
+          bullets.splice(
+            bulletIndex,
+            1
+          );
+
+          damagePlayer();
+
+          /*
+            damagePlayer内で敵弾配列が更新されるため、
+            このフレームの衝突判定をここで終了する
+          */
+          break;
+        }
+      }
 
         updateHud();
       }
