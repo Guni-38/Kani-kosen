@@ -8,6 +8,7 @@
   >
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <title>蟹光線</title>
 
   <style>
@@ -29,6 +30,7 @@
         "Hiragino Kaku Gothic ProN",
         "Yu Gothic",
         sans-serif;
+
       overscroll-behavior: none;
     }
 
@@ -46,6 +48,7 @@
     #gameApp {
       width: 100%;
       max-width: 560px;
+
       user-select: none;
       -webkit-user-select: none;
     }
@@ -60,114 +63,115 @@
     .status-box {
       min-width: 0;
       padding: 8px 4px;
+
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
+
       background: rgba(255, 255, 255, 0.06);
+
       text-align: center;
     }
 
     .status-label {
       margin-bottom: 2px;
+
       color: rgba(255, 255, 255, 0.68);
       font-size: 11px;
     }
 
     .status-value {
       overflow: hidden;
+
       font-size: 19px;
       font-weight: 700;
+
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .goal-area {
-      margin-bottom: 10px;
-    }
-
-    .goal-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 5px;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 13px;
-    }
-
-    .goal-track {
-      height: 11px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    #goalBar {
-      width: 0%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #ffc940, #fff28b);
-      transition: width 0.15s linear;
-    }
-
     #gameFrame {
       position: relative;
+
       width: 100%;
       overflow: hidden;
+
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 18px;
+
       background: #000000;
+
       aspect-ratio: 3 / 4;
     }
 
     #canvas {
       display: block;
+
       width: 100%;
       height: 100%;
+
       touch-action: none;
     }
 
     #controls {
       position: absolute;
+
       right: 0;
       bottom: 0;
       left: 0;
+
       display: flex;
       align-items: flex-end;
       justify-content: flex-start;
+
       padding: 14px;
+
       pointer-events: none;
     }
 
     #stickBase {
       position: relative;
+
       width: 92px;
       height: 92px;
+
       border: 2px solid rgba(255, 255, 255, 0.42);
       border-radius: 50%;
+
       background: rgba(0, 0, 0, 0.35);
+
       backdrop-filter: blur(4px);
+
       pointer-events: auto;
       touch-action: none;
     }
 
     #stickKnob {
       position: absolute;
+
       left: 27px;
       top: 27px;
+
       width: 38px;
       height: 38px;
+
       border: 2px solid rgba(255, 255, 255, 0.75);
       border-radius: 50%;
+
       background: rgba(255, 255, 255, 0.3);
+
       pointer-events: none;
     }
 
     .panel {
       position: absolute;
       inset: 0;
+
       display: none;
       align-items: center;
       justify-content: center;
+
       padding: 20px;
+
       background: rgba(0, 0, 0, 0.18);
     }
 
@@ -178,52 +182,74 @@
     .panel-card {
       width: 100%;
       max-width: 330px;
+
       padding: 22px;
+
       border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 18px;
+
       background: rgba(0, 5, 15, 0.9);
+
       text-align: center;
+
       backdrop-filter: blur(7px);
     }
 
     .panel-title {
       margin: 0 0 10px;
+
       font-size: 28px;
     }
 
     .panel-message {
       margin: 0 0 18px;
+
       color: rgba(255, 255, 255, 0.76);
+
       font-size: 14px;
       line-height: 1.7;
     }
 
     .result-label {
       margin-bottom: 2px;
+
       color: rgba(255, 255, 255, 0.65);
+
       font-size: 13px;
     }
 
     .result-score {
       margin-bottom: 4px;
+
       font-size: 42px;
       font-weight: 700;
     }
 
     .result-kills {
       margin-bottom: 18px;
+
       color: rgba(255, 255, 255, 0.7);
+
       font-size: 14px;
     }
 
     .main-button {
       width: 100%;
       min-height: 50px;
+
       border: 0;
       border-radius: 13px;
-      background: linear-gradient(135deg, #ff9c4a, #ff5e49);
+
+      background: linear-gradient(
+        135deg,
+        #ff9c4a,
+        #ff5e49
+      );
+
       color: #ffffff;
+
       font-weight: 700;
+
       cursor: pointer;
     }
 
@@ -233,7 +259,9 @@
 
     .guide {
       margin: 9px 0 0;
+
       color: rgba(255, 255, 255, 0.66);
+
       font-size: 12px;
       text-align: center;
     }
@@ -267,6 +295,7 @@
       #stickKnob {
         left: 25px;
         top: 25px;
+
         width: 34px;
         height: 34px;
       }
@@ -275,41 +304,71 @@
 </head>
 
 <body>
+
   <main id="gameApp">
-    <section class="status-grid" aria-live="polite">
+
+    <section
+      class="status-grid"
+      aria-live="polite"
+    >
+
       <div class="status-box">
-        <div class="status-label">スコア</div>
-        <div id="score" class="status-value">0</div>
+        <div class="status-label">
+          スコア
+        </div>
+
+        <div
+          id="score"
+          class="status-value"
+        >
+          0
+        </div>
       </div>
 
       <div class="status-box">
-        <div class="status-label">ライフ</div>
-        <div id="life" class="status-value">3</div>
+        <div class="status-label">
+          ライフ
+        </div>
+
+        <div
+          id="life"
+          class="status-value"
+        >
+          3
+        </div>
       </div>
 
       <div class="status-box">
-        <div class="status-label">レベル</div>
-        <div id="level" class="status-value">1</div>
+        <div class="status-label">
+          レベル
+        </div>
+
+        <div
+          id="level"
+          class="status-value"
+        >
+          1
+        </div>
       </div>
 
       <div class="status-box">
-        <div class="status-label">撃破</div>
-        <div id="kills" class="status-value">0</div>
+        <div class="status-label">
+          撃破
+        </div>
+
+        <div
+          id="kills"
+          class="status-value"
+        >
+          0
+        </div>
       </div>
+
     </section>
 
-    <section class="goal-area">
-      <div class="goal-row">
-        <span>クリアまで</span>
-        <span id="goalText">0 / 10000</span>
-      </div>
-
-      <div class="goal-track">
-        <div id="goalBar"></div>
-      </div>
-    </section>
 
     <section id="gameFrame">
+
       <canvas
         id="canvas"
         width="720"
@@ -317,304 +376,615 @@
         aria-label="仮想スティックで蟹を操作するシューティングゲーム"
       ></canvas>
 
+
       <div id="controls">
-        <div id="stickBase" aria-label="移動スティック">
+
+        <div
+          id="stickBase"
+          aria-label="移動スティック"
+        >
           <div id="stickKnob"></div>
         </div>
+
       </div>
 
-      <div id="startPanel" class="panel visible">
+
+      <div
+        id="startPanel"
+        class="panel visible"
+      >
+
         <div class="panel-card">
-          <h1 class="panel-title">蟹光線</h1>
+
+          <h1 class="panel-title">
+            蟹光線
+          </h1>
 
           <p class="panel-message">
             左下のスティックで蟹を動かします。<br>
             蟹光線は常時オート発射されます。<br>
-            10000点達成で答えの１文字をゲット。
+            敵を倒してハイスコアを目指してください。
           </p>
 
-          <button id="startButton" class="main-button" type="button">
+          <button
+            id="startButton"
+            class="main-button"
+            type="button"
+          >
             ゲームスタート
           </button>
+
         </div>
+
       </div>
 
-      <div id="gameOverPanel" class="panel">
+
+      <div
+        id="gameOverPanel"
+        class="panel"
+      >
+
         <div class="panel-card">
-          <h2 class="panel-title">ゲームオーバー</h2>
 
-          <div class="result-label">最終スコア</div>
-          <div id="finalScore" class="result-score">0</div>
-          <div id="finalKills" class="result-kills">撃破数 0</div>
+          <h2 class="panel-title">
+            ゲームオーバー
+          </h2>
 
-          <button id="retryButton" class="main-button" type="button">
+          <div class="result-label">
+            最終スコア
+          </div>
+
+          <div
+            id="finalScore"
+            class="result-score"
+          >
+            0
+          </div>
+
+          <div
+            id="finalKills"
+            class="result-kills"
+          >
+            撃破数 0
+          </div>
+
+          <button
+            id="retryButton"
+            class="main-button"
+            type="button"
+          >
             再挑戦
           </button>
+
         </div>
+
       </div>
 
-      <div id="clearPanel" class="panel">
-        <div class="panel-card">
-          <h2 class="panel-title">CONGRATULATIONS!</h2>
-
-          <p class="panel-message">ゲームクリア！　答えの１文字は「ー」</p>
-
-          <div class="result-label">最終スコア</div>
-          <div id="clearScore" class="result-score">10000</div>
-          <div id="clearKills" class="result-kills">撃破数 0</div>
-
-          <button id="clearRetryButton" class="main-button" type="button">
-            もう一度遊ぶ
-          </button>
-        </div>
-      </div>
     </section>
+
 
     <p class="guide">
       左下のスティックで移動・蟹光線は常時オート発射
     </p>
+
   </main>
+
 
   <script>
     (() => {
+
       "use strict";
 
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
+
+      const canvas =
+        document.getElementById("canvas");
+
+      const ctx =
+        canvas.getContext("2d");
+
 
       const W = canvas.width;
       const H = canvas.height;
-      const CLEAR_SCORE = 10000;
 
-      const scoreElement = document.getElementById("score");
-      const lifeElement = document.getElementById("life");
-      const levelElement = document.getElementById("level");
-      const killsElement = document.getElementById("kills");
-      const goalTextElement = document.getElementById("goalText");
-      const goalBarElement = document.getElementById("goalBar");
 
-      const startPanel = document.getElementById("startPanel");
-      const gameOverPanel = document.getElementById("gameOverPanel");
-      const clearPanel = document.getElementById("clearPanel");
+      const scoreElement =
+        document.getElementById("score");
 
-      const finalScoreElement = document.getElementById("finalScore");
-      const finalKillsElement = document.getElementById("finalKills");
-      const clearScoreElement = document.getElementById("clearScore");
-      const clearKillsElement = document.getElementById("clearKills");
+      const lifeElement =
+        document.getElementById("life");
 
-      const startButton = document.getElementById("startButton");
-      const retryButton = document.getElementById("retryButton");
-      const clearRetryButton = document.getElementById("clearRetryButton");
+      const levelElement =
+        document.getElementById("level");
 
-      const stickBase = document.getElementById("stickBase");
-      const stickKnob = document.getElementById("stickKnob");
+      const killsElement =
+        document.getElementById("kills");
+
+
+      const startPanel =
+        document.getElementById("startPanel");
+
+      const gameOverPanel =
+        document.getElementById("gameOverPanel");
+
+
+      const finalScoreElement =
+        document.getElementById("finalScore");
+
+      const finalKillsElement =
+        document.getElementById("finalKills");
+
+
+      const startButton =
+        document.getElementById("startButton");
+
+      const retryButton =
+        document.getElementById("retryButton");
+
+
+      const stickBase =
+        document.getElementById("stickBase");
+
+      const stickKnob =
+        document.getElementById("stickKnob");
+
 
       let running = false;
+
       let animationId = null;
+
       let lastTime = 0;
 
+
       let elapsed = 0;
+
       let score = 0;
+
       let life = 3;
+
       let level = 1;
+
       let kills = 0;
 
+
       let spawnTimer = 0;
+
       let beamTimer = 0;
+
       let bossTimer = 30;
+
       let flashTimer = 0;
+
       let shakeTimer = 0;
 
+
       let player = null;
+
       let enemies = [];
+
       let beams = [];
+
       let bullets = [];
+
       let particles = [];
 
+
       let stickPointerId = null;
+
       let stickX = 0;
+
       let stickY = 0;
 
-      const bubbles = Array.from({ length: 40 }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        radius: 2 + Math.random() * 5,
-        speed: 18 + Math.random() * 40,
-        alpha: 0.08 + Math.random() * 0.18
-      }));
+
+      const bubbles =
+        Array.from(
+          {
+            length: 40
+          },
+          () => ({
+            x: Math.random() * W,
+
+            y: Math.random() * H,
+
+            radius:
+              2 +
+              Math.random() * 5,
+
+            speed:
+              18 +
+              Math.random() * 40,
+
+            alpha:
+              0.08 +
+              Math.random() * 0.18
+          })
+        );
+
 
       function showPanel(panel) {
-        startPanel.classList.remove("visible");
-        gameOverPanel.classList.remove("visible");
-        clearPanel.classList.remove("visible");
+
+        startPanel.classList.remove(
+          "visible"
+        );
+
+        gameOverPanel.classList.remove(
+          "visible"
+        );
+
 
         if (panel) {
-          panel.classList.add("visible");
+
+          panel.classList.add(
+            "visible"
+          );
+
         }
+
       }
+
 
       function updateHud() {
-        scoreElement.textContent = score;
-        lifeElement.textContent = life;
-        levelElement.textContent = level;
-        killsElement.textContent = kills;
 
-        goalTextElement.textContent =
-          Math.min(score, CLEAR_SCORE) + " / " + CLEAR_SCORE;
+        scoreElement.textContent =
+          score;
 
-        goalBarElement.style.width =
-          Math.min(100, score / CLEAR_SCORE * 100) + "%";
+        lifeElement.textContent =
+          life;
+
+        levelElement.textContent =
+          level;
+
+        killsElement.textContent =
+          kills;
+
       }
+
 
       function resetStickVisual() {
-        const baseSize = stickBase.clientWidth;
-        const knobSize = stickKnob.clientWidth;
-        const center = (baseSize - knobSize) / 2;
 
-        stickKnob.style.left = center + "px";
-        stickKnob.style.top = center + "px";
+        const baseSize =
+          stickBase.clientWidth;
+
+        const knobSize =
+          stickKnob.clientWidth;
+
+        const center =
+          (baseSize - knobSize) / 2;
+
+
+        stickKnob.style.left =
+          center + "px";
+
+        stickKnob.style.top =
+          center + "px";
+
       }
+
 
       function releaseStick() {
+
         stickPointerId = null;
+
         stickX = 0;
+
         stickY = 0;
+
         resetStickVisual();
+
       }
+
 
       function resetGame() {
+
         elapsed = 0;
+
         score = 0;
+
         life = 3;
+
         level = 1;
+
         kills = 0;
 
+
         spawnTimer = 0;
+
         beamTimer = 0;
+
         bossTimer = 30;
+
         flashTimer = 0;
+
         shakeTimer = 0;
 
+
         enemies = [];
+
         beams = [];
+
         bullets = [];
+
         particles = [];
 
+
         releaseStick();
+
 
         player = {
+
           x: W / 2,
+
           y: H - 220,
+
           radius: 34,
+
           speed: 430,
+
           invincible: 0
+
         };
 
+
         updateHud();
+
       }
+
 
       function startGame() {
+
         if (animationId !== null) {
-          cancelAnimationFrame(animationId);
+
+          cancelAnimationFrame(
+            animationId
+          );
+
           animationId = null;
+
         }
+
 
         resetGame();
+
         showPanel(null);
 
+
         running = true;
-        lastTime = performance.now();
-        animationId = requestAnimationFrame(gameLoop);
+
+        lastTime =
+          performance.now();
+
+
+        animationId =
+          requestAnimationFrame(
+            gameLoop
+          );
+
       }
+
 
       function endGame() {
+
         running = false;
+
         releaseStick();
 
-        finalScoreElement.textContent = score;
-        finalKillsElement.textContent = "撃破数 " + kills;
 
-        showPanel(gameOverPanel);
+        finalScoreElement.textContent =
+          score;
+
+        finalKillsElement.textContent =
+          "撃破数 " + kills;
+
+
+        showPanel(
+          gameOverPanel
+        );
+
       }
 
-      function clearGame() {
-        running = false;
-        releaseStick();
 
-        clearScoreElement.textContent = score;
-        clearKillsElement.textContent = "撃破数 " + kills;
+      startButton.addEventListener(
+        "click",
+        startGame
+      );
 
-        showPanel(clearPanel);
-      }
 
-      startButton.addEventListener("click", startGame);
-      retryButton.addEventListener("click", startGame);
-      clearRetryButton.addEventListener("click", startGame);
+      retryButton.addEventListener(
+        "click",
+        startGame
+      );
+
 
       function updateStick(event) {
-        const rect = stickBase.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
 
-        let dx = event.clientX - centerX;
-        let dy = event.clientY - centerY;
+        const rect =
+          stickBase.getBoundingClientRect();
 
-        const maxDistance = rect.width * 0.32;
-        const distance = Math.hypot(dx, dy);
 
-        if (distance > maxDistance && distance > 0) {
-          dx = dx / distance * maxDistance;
-          dy = dy / distance * maxDistance;
+        const centerX =
+          rect.left +
+          rect.width / 2;
+
+        const centerY =
+          rect.top +
+          rect.height / 2;
+
+
+        let dx =
+          event.clientX -
+          centerX;
+
+        let dy =
+          event.clientY -
+          centerY;
+
+
+        const maxDistance =
+          rect.width * 0.32;
+
+
+        const distance =
+          Math.hypot(
+            dx,
+            dy
+          );
+
+
+        if (
+          distance >
+          maxDistance &&
+          distance > 0
+        ) {
+
+          dx =
+            dx /
+            distance *
+            maxDistance;
+
+          dy =
+            dy /
+            distance *
+            maxDistance;
+
         }
 
-        stickX = dx / maxDistance;
-        stickY = dy / maxDistance;
 
-        const knobSize = stickKnob.clientWidth;
-        const knobCenter = (rect.width - knobSize) / 2;
+        stickX =
+          dx /
+          maxDistance;
 
-        stickKnob.style.left = knobCenter + dx + "px";
-        stickKnob.style.top = knobCenter + dy + "px";
+        stickY =
+          dy /
+          maxDistance;
+
+
+        const knobSize =
+          stickKnob.clientWidth;
+
+
+        const knobCenter =
+          (
+            rect.width -
+            knobSize
+          ) / 2;
+
+
+        stickKnob.style.left =
+          knobCenter +
+          dx +
+          "px";
+
+
+        stickKnob.style.top =
+          knobCenter +
+          dy +
+          "px";
+
       }
 
-      stickBase.addEventListener("pointerdown", event => {
-        if (!running) {
-          return;
+
+      stickBase.addEventListener(
+        "pointerdown",
+        event => {
+
+          if (!running) {
+            return;
+          }
+
+
+          event.preventDefault();
+
+
+          stickPointerId =
+            event.pointerId;
+
+
+          stickBase.setPointerCapture(
+            event.pointerId
+          );
+
+
+          updateStick(
+            event
+          );
+
         }
+      );
 
-        event.preventDefault();
 
-        stickPointerId = event.pointerId;
-        stickBase.setPointerCapture(event.pointerId);
-        updateStick(event);
-      });
+      stickBase.addEventListener(
+        "pointermove",
+        event => {
 
-      stickBase.addEventListener("pointermove", event => {
-        if (event.pointerId !== stickPointerId) {
-          return;
+          if (
+            event.pointerId !==
+            stickPointerId
+          ) {
+            return;
+          }
+
+
+          event.preventDefault();
+
+
+          updateStick(
+            event
+          );
+
         }
+      );
 
-        event.preventDefault();
-        updateStick(event);
-      });
 
-      stickBase.addEventListener("pointerup", event => {
-        if (event.pointerId === stickPointerId) {
-          releaseStick();
+      stickBase.addEventListener(
+        "pointerup",
+        event => {
+
+          if (
+            event.pointerId ===
+            stickPointerId
+          ) {
+
+            releaseStick();
+
+          }
+
         }
-      });
+      );
 
-      stickBase.addEventListener("pointercancel", event => {
-        if (event.pointerId === stickPointerId) {
-          releaseStick();
+
+      stickBase.addEventListener(
+        "pointercancel",
+        event => {
+
+          if (
+            event.pointerId ===
+            stickPointerId
+          ) {
+
+            releaseStick();
+
+          }
+
         }
-      });
+      );
 
-      window.addEventListener("blur", releaseStick);
-      window.addEventListener("resize", resetStickVisual);
+
+      window.addEventListener(
+        "blur",
+        releaseStick
+      );
+
+
+      window.addEventListener(
+        "resize",
+        resetStickVisual
+      );
+
 
       function spawnEnemy(type) {
-        const isBoss = type === "boss";
+
+        const isBoss =
+          type === "boss";
+
 
         const radius =
           isBoss
@@ -625,6 +995,7 @@
                 ? 38
                 : 31;
 
+
         const hp =
           isBoss
             ? 48 + level * 6
@@ -634,19 +1005,52 @@
                 ? 4
                 : 2;
 
+
         enemies.push({
+
           type,
-          x: radius + Math.random() * (W - radius * 2),
-          y: isBoss ? -100 : -50,
+
+          x:
+            radius +
+            Math.random() *
+            (
+              W -
+              radius * 2
+            ),
+
+          y:
+            isBoss
+              ? -100
+              : -50,
+
           radius,
+
           hp,
+
           maxHp: hp,
+
           speed:
             isBoss
               ? 44
-              : (92 + Math.random() * 55) * (1 + level * 0.07),
-          phase: Math.random() * Math.PI * 2,
-          fireTimer: 1.2 + Math.random(),
+              :
+              (
+                92 +
+                Math.random() * 55
+              ) *
+              (
+                1 +
+                level * 0.07
+              ),
+
+          phase:
+            Math.random() *
+            Math.PI *
+            2,
+
+          fireTimer:
+            1.2 +
+            Math.random(),
+
           value:
             isBoss
               ? 2500
@@ -655,8 +1059,11 @@
                 : type === "gunner"
                   ? 220
                   : 100
+
         });
+
       }
+
 
       function fireAimedBullets(
         enemy,
@@ -664,72 +1071,184 @@
         spread = 0.24,
         speed = 205
       ) {
-        const baseAngle = Math.atan2(
-          player.y - enemy.y,
-          player.x - enemy.x
-        );
 
-        for (let i = 0; i < count; i++) {
+        const baseAngle =
+          Math.atan2(
+            player.y -
+            enemy.y,
+
+            player.x -
+            enemy.x
+          );
+
+
+        for (
+          let i = 0;
+          i < count;
+          i++
+        ) {
+
           const angle =
             baseAngle +
-            (i - (count - 1) / 2) * spread;
+            (
+              i -
+              (count - 1) / 2
+            ) *
+            spread;
+
 
           bullets.push({
-            x: enemy.x,
-            y: enemy.y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            radius: 8
+
+            x:
+              enemy.x,
+
+            y:
+              enemy.y,
+
+            vx:
+              Math.cos(angle) *
+              speed,
+
+            vy:
+              Math.sin(angle) *
+              speed,
+
+            radius:
+              8
+
           });
+
         }
+
       }
+
 
       function fireRadialBullets(
         enemy,
         count = 8,
         speed = 155
       ) {
-        for (let i = 0; i < count; i++) {
+
+        for (
+          let i = 0;
+          i < count;
+          i++
+        ) {
+
           const angle =
-            i / count * Math.PI * 2 +
-            elapsed * 0.25;
+            i /
+            count *
+            Math.PI *
+            2 +
+            elapsed *
+            0.25;
+
 
           bullets.push({
-            x: enemy.x,
-            y: enemy.y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            radius: 7
+
+            x:
+              enemy.x,
+
+            y:
+              enemy.y,
+
+            vx:
+              Math.cos(angle) *
+              speed,
+
+            vy:
+              Math.sin(angle) *
+              speed,
+
+            radius:
+              7
+
           });
+
         }
+
       }
+
 
       function fireBeam() {
+
         beams.push({
-          x: player.x,
-          y: player.y - 38,
-          width: 18,
-          height: 120,
-          speed: 1080
+
+          x:
+            player.x,
+
+          y:
+            player.y -
+            38,
+
+          width:
+            18,
+
+          height:
+            120,
+
+          speed:
+            1080
+
         });
+
       }
 
-      function createParticles(x, y, count) {
-        for (let i = 0; i < count; i++) {
-          const angle = Math.random() * Math.PI * 2;
-          const speed = 50 + Math.random() * 210;
+
+      function createParticles(
+        x,
+        y,
+        count
+      ) {
+
+        for (
+          let i = 0;
+          i < count;
+          i++
+        ) {
+
+          const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+          const speed =
+            50 +
+            Math.random() *
+            210;
+
 
           particles.push({
+
             x,
+
             y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            life: 0.25 + Math.random() * 0.5,
-            maxLife: 0.75,
-            size: 3 + Math.random() * 7
+
+            vx:
+              Math.cos(angle) *
+              speed,
+
+            vy:
+              Math.sin(angle) *
+              speed,
+
+            life:
+              0.25 +
+              Math.random() *
+              0.5,
+
+            size:
+              3 +
+              Math.random() *
+              7
+
           });
+
         }
+
       }
+
 
       function circleCollision(
         ax,
@@ -739,301 +1258,687 @@
         by,
         br
       ) {
-        const dx = ax - bx;
-        const dy = ay - by;
-        const radius = ar + br;
 
-        return dx * dx + dy * dy < radius * radius;
+        const dx =
+          ax -
+          bx;
+
+        const dy =
+          ay -
+          by;
+
+        const radius =
+          ar +
+          br;
+
+
+        return (
+          dx * dx +
+          dy * dy
+        ) <
+        (
+          radius *
+          radius
+        );
+
       }
+
 
       function damagePlayer() {
+
         if (
           !running ||
-          player.invincible > 0
+          player.invincible >
+          0
         ) {
+
           return;
+
         }
+
 
         life--;
-        player.invincible = 1.5;
-        flashTimer = 0.23;
-        shakeTimer = 0.28;
 
-        bullets = bullets.filter(bullet =>
-          Math.hypot(
-            bullet.x - player.x,
-            bullet.y - player.y
-          ) > 140
+
+        player.invincible =
+          1.5;
+
+
+        flashTimer =
+          0.23;
+
+
+        shakeTimer =
+          0.28;
+
+
+        /*
+          被弾直後にプレイヤー周囲の敵弾を消す。
+          bullets配列そのものを新しい配列に置き換える。
+        */
+        bullets =
+          bullets.filter(
+            bullet =>
+              Math.hypot(
+                bullet.x -
+                player.x,
+
+                bullet.y -
+                player.y
+              ) >
+              140
+          );
+
+
+        createParticles(
+          player.x,
+          player.y,
+          24
         );
 
-        createParticles(player.x, player.y, 24);
+
         updateHud();
 
-        if (life <= 0) {
+
+        if (
+          life <= 0
+        ) {
+
           endGame();
+
         }
+
       }
 
+
       function update(dt) {
+
         elapsed += dt;
 
-        level = Math.min(
-          10,
-          1 + Math.floor(score / 1000)
-        );
 
-        player.invincible = Math.max(
-          0,
-          player.invincible - dt
-        );
+        /*
+          1000点ごとにレベルアップ。
+          10000点を超えてもゲームは終了しない。
+          レベルは上限10。
+        */
+        level =
+          Math.min(
+            10,
+            1 +
+            Math.floor(
+              score / 1000
+            )
+          );
 
-        flashTimer = Math.max(
-          0,
-          flashTimer - dt
-        );
 
-        shakeTimer = Math.max(
-          0,
-          shakeTimer - dt
-        );
+        player.invincible =
+          Math.max(
+            0,
+            player.invincible -
+            dt
+          );
 
-        player.x += stickX * player.speed * dt;
-        player.y += stickY * player.speed * dt;
 
-        player.x = Math.max(
-          45,
-          Math.min(W - 45, player.x)
-        );
+        flashTimer =
+          Math.max(
+            0,
+            flashTimer -
+            dt
+          );
 
-        player.y = Math.max(
-          H * 0.35,
-          Math.min(H - 190, player.y)
-        );
 
+        shakeTimer =
+          Math.max(
+            0,
+            shakeTimer -
+            dt
+          );
+
+
+        /*
+          仮想スティック操作
+        */
+        player.x +=
+          stickX *
+          player.speed *
+          dt;
+
+
+        player.y +=
+          stickY *
+          player.speed *
+          dt;
+
+
+        player.x =
+          Math.max(
+            45,
+            Math.min(
+              W - 45,
+              player.x
+            )
+          );
+
+
+        /*
+          下端まで移動できないようにして
+          指で自機が隠れにくくする
+        */
+        player.y =
+          Math.max(
+            H * 0.35,
+            Math.min(
+              H - 190,
+              player.y
+            )
+          );
+
+
+        /*
+          蟹光線は常時オート発射
+        */
         beamTimer -= dt;
 
-        if (beamTimer <= 0) {
+
+        if (
+          beamTimer <= 0
+        ) {
+
           fireBeam();
-          beamTimer = 0.09;
+
+          beamTimer =
+            0.09;
+
         }
 
+
+        /*
+          敵出現
+        */
         spawnTimer -= dt;
 
-        const spawnInterval = Math.max(
-          0.34,
-          0.82 - level * 0.035
-        );
 
-        if (spawnTimer <= 0) {
-          const roll = Math.random();
+        const spawnInterval =
+          Math.max(
+            0.34,
+            0.82 -
+            level *
+            0.035
+          );
+
+
+        if (
+          spawnTimer <= 0
+        ) {
+
+          const roll =
+            Math.random();
+
 
           if (
             level >= 3 &&
             roll > 0.8
           ) {
-            spawnEnemy("charger");
+
+            spawnEnemy(
+              "charger"
+            );
+
           } else if (
             level >= 2 &&
             roll > 0.58
           ) {
-            spawnEnemy("gunner");
+
+            spawnEnemy(
+              "gunner"
+            );
+
           } else {
-            spawnEnemy("normal");
+
+            spawnEnemy(
+              "normal"
+            );
+
           }
 
-          spawnTimer = spawnInterval;
+
+          spawnTimer =
+            spawnInterval;
+
         }
 
+
+        /*
+          ボス
+        */
         bossTimer -= dt;
 
-        if (bossTimer <= 0) {
-          spawnEnemy("boss");
-          bossTimer = Math.max(
-            34,
-            50 - level
+
+        if (
+          bossTimer <= 0
+        ) {
+
+          spawnEnemy(
+            "boss"
           );
+
+
+          bossTimer =
+            Math.max(
+              34,
+              50 -
+              level
+            );
+
         }
 
-        bubbles.forEach(bubble => {
-          bubble.y -= bubble.speed * dt;
 
-          if (bubble.y < -10) {
-            bubble.y = H + 10;
-            bubble.x = Math.random() * W;
+        /*
+          背景の泡
+        */
+        bubbles.forEach(
+          bubble => {
+
+            bubble.y -=
+              bubble.speed *
+              dt;
+
+
+            if (
+              bubble.y <
+              -10
+            ) {
+
+              bubble.y =
+                H + 10;
+
+              bubble.x =
+                Math.random() *
+                W;
+
+            }
+
           }
-        });
-
-        beams.forEach(beam => {
-          beam.y -= beam.speed * dt;
-        });
-
-        beams = beams.filter(
-          beam => beam.y + beam.height > -30
         );
 
-        enemies.forEach(enemy => {
-          enemy.phase +=
-            dt *
-            (
-              enemy.type === "charger"
-                ? 5
-                : 2.2
-            );
 
-          if (enemy.type === "boss") {
-            if (enemy.y < 145) {
-              enemy.y += enemy.speed * dt;
-            } else {
-              enemy.x +=
-                Math.sin(enemy.phase) *
-                105 *
-                dt;
+        /*
+          自機ビーム
+        */
+        beams.forEach(
+          beam => {
 
-              enemy.x = Math.max(
-                enemy.radius,
-                Math.min(
-                  W - enemy.radius,
-                  enemy.x
-                )
+            beam.y -=
+              beam.speed *
+              dt;
+
+          }
+        );
+
+
+        beams =
+          beams.filter(
+            beam =>
+              beam.y +
+              beam.height >
+              -30
+          );
+
+
+        /*
+          敵の移動・攻撃
+        */
+        enemies.forEach(
+          enemy => {
+
+            enemy.phase +=
+              dt *
+              (
+                enemy.type ===
+                "charger"
+                  ? 5
+                  : 2.2
               );
-            }
 
-            enemy.fireTimer -= dt;
 
-            if (enemy.fireTimer <= 0) {
-              if (Math.random() < 0.3) {
-                fireRadialBullets(
-                  enemy,
-                  8,
-                  155 + level * 3
-                );
-              } else {
-                fireAimedBullets(
-                  enemy,
-                  3,
-                  0.24,
-                  210 + level * 3
-                );
-              }
-
-              enemy.fireTimer = Math.max(
-                1.05,
-                1.7 - level * 0.025
-              );
-            }
-          } else {
-            enemy.y += enemy.speed * dt;
-
-            if (enemy.type === "normal") {
-              enemy.x +=
-                Math.sin(enemy.phase) *
-                85 *
-                dt;
-            }
-
-            if (enemy.type === "charger") {
-              enemy.x +=
-                Math.sign(player.x - enemy.x) *
-                165 *
-                dt;
-            }
-
-            if (enemy.type === "gunner") {
-              enemy.x +=
-                Math.sin(enemy.phase) *
-                105 *
-                dt;
-
-              enemy.fireTimer -= dt;
+            if (
+              enemy.type ===
+              "boss"
+            ) {
 
               if (
-                enemy.fireTimer <= 0 &&
-                enemy.y < H * 0.66
+                enemy.y <
+                145
               ) {
-                const bulletCount =
-                  level >= 7 ? 2 : 1;
 
-                fireAimedBullets(
-                  enemy,
-                  bulletCount,
-                  0.22,
-                  200 + level * 3
-                );
+                enemy.y +=
+                  enemy.speed *
+                  dt;
 
-                enemy.fireTimer = Math.max(
-                  1.3,
-                  2.1 - level * 0.035
-                );
+              } else {
+
+                enemy.x +=
+                  Math.sin(
+                    enemy.phase
+                  ) *
+                  105 *
+                  dt;
+
+
+                enemy.x =
+                  Math.max(
+                    enemy.radius,
+                    Math.min(
+                      W -
+                      enemy.radius,
+
+                      enemy.x
+                    )
+                  );
+
               }
+
+
+              enemy.fireTimer -=
+                dt;
+
+
+              if (
+                enemy.fireTimer <=
+                0
+              ) {
+
+                if (
+                  Math.random() <
+                  0.3
+                ) {
+
+                  fireRadialBullets(
+                    enemy,
+                    8,
+                    155 +
+                    level *
+                    3
+                  );
+
+                } else {
+
+                  fireAimedBullets(
+                    enemy,
+                    3,
+                    0.24,
+                    210 +
+                    level *
+                    3
+                  );
+
+                }
+
+
+                enemy.fireTimer =
+                  Math.max(
+                    1.05,
+                    1.7 -
+                    level *
+                    0.025
+                  );
+
+              }
+
+            } else {
+
+              enemy.y +=
+                enemy.speed *
+                dt;
+
+
+              if (
+                enemy.type ===
+                "normal"
+              ) {
+
+                enemy.x +=
+                  Math.sin(
+                    enemy.phase
+                  ) *
+                  85 *
+                  dt;
+
+              }
+
+
+              if (
+                enemy.type ===
+                "charger"
+              ) {
+
+                enemy.x +=
+                  Math.sign(
+                    player.x -
+                    enemy.x
+                  ) *
+                  165 *
+                  dt;
+
+              }
+
+
+              if (
+                enemy.type ===
+                "gunner"
+              ) {
+
+                enemy.x +=
+                  Math.sin(
+                    enemy.phase
+                  ) *
+                  105 *
+                  dt;
+
+
+                enemy.fireTimer -=
+                  dt;
+
+
+                if (
+                  enemy.fireTimer <=
+                    0 &&
+                  enemy.y <
+                    H *
+                    0.66
+                ) {
+
+                  const bulletCount =
+                    level >= 7
+                      ? 2
+                      : 1;
+
+
+                  fireAimedBullets(
+                    enemy,
+                    bulletCount,
+                    0.22,
+                    200 +
+                    level *
+                    3
+                  );
+
+
+                  enemy.fireTimer =
+                    Math.max(
+                      1.3,
+                      2.1 -
+                      level *
+                      0.035
+                    );
+
+                }
+
+              }
+
             }
+
           }
-        });
-
-        bullets.forEach(bullet => {
-          bullet.x += bullet.vx * dt;
-          bullet.y += bullet.vy * dt;
-        });
-
-        bullets = bullets.filter(bullet =>
-          bullet.x > -30 &&
-          bullet.x < W + 30 &&
-          bullet.y > -30 &&
-          bullet.y < H + 40
         );
 
-        particles.forEach(particle => {
-          particle.x += particle.vx * dt;
-          particle.y += particle.vy * dt;
-          particle.vx *= 0.96;
-          particle.vy *= 0.96;
-          particle.life -= dt;
-        });
 
-        particles = particles.filter(
-          particle => particle.life > 0
+        /*
+          敵弾移動
+        */
+        bullets.forEach(
+          bullet => {
+
+            bullet.x +=
+              bullet.vx *
+              dt;
+
+
+            bullet.y +=
+              bullet.vy *
+              dt;
+
+          }
         );
 
+
+        bullets =
+          bullets.filter(
+            bullet =>
+              bullet.x >
+                -30 &&
+              bullet.x <
+                W + 30 &&
+              bullet.y >
+                -30 &&
+              bullet.y <
+                H + 40
+          );
+
+
+        /*
+          パーティクル
+        */
+        particles.forEach(
+          particle => {
+
+            particle.x +=
+              particle.vx *
+              dt;
+
+
+            particle.y +=
+              particle.vy *
+              dt;
+
+
+            particle.vx *=
+              0.96;
+
+
+            particle.vy *=
+              0.96;
+
+
+            particle.life -=
+              dt;
+
+          }
+        );
+
+
+        particles =
+          particles.filter(
+            particle =>
+              particle.life >
+              0
+          );
+
+
+        /*
+          自機ビームと敵の当たり判定
+        */
         for (
-          let enemyIndex = enemies.length - 1;
+          let enemyIndex =
+            enemies.length - 1;
+
           enemyIndex >= 0;
+
           enemyIndex--
         ) {
-          const enemy = enemies[enemyIndex];
+
+          const enemy =
+            enemies[
+              enemyIndex
+            ];
+
 
           for (
-            let beamIndex = beams.length - 1;
+            let beamIndex =
+              beams.length - 1;
+
             beamIndex >= 0;
+
             beamIndex--
           ) {
-            const beam = beams[beamIndex];
 
-            const closestX = Math.max(
-              beam.x - beam.width / 2,
-              Math.min(
-                enemy.x,
-                beam.x + beam.width / 2
-              )
-            );
+            const beam =
+              beams[
+                beamIndex
+              ];
 
-            const closestY = Math.max(
-              beam.y - beam.height,
-              Math.min(
-                enemy.y,
-                beam.y
-              )
-            );
 
-            const hitDistance = Math.hypot(
-              enemy.x - closestX,
-              enemy.y - closestY
-            );
+            const closestX =
+              Math.max(
+                beam.x -
+                beam.width /
+                2,
+
+                Math.min(
+                  enemy.x,
+
+                  beam.x +
+                  beam.width /
+                  2
+                )
+              );
+
+
+            const closestY =
+              Math.max(
+                beam.y -
+                beam.height,
+
+                Math.min(
+                  enemy.y,
+                  beam.y
+                )
+              );
+
+
+            const hitDistance =
+              Math.hypot(
+                enemy.x -
+                closestX,
+
+                enemy.y -
+                closestY
+              );
+
 
             if (
               hitDistance <
-              enemy.radius * 0.78
+              enemy.radius *
+              0.78
             ) {
-              beams.splice(beamIndex, 1);
+
+              beams.splice(
+                beamIndex,
+                1
+              );
+
+
               enemy.hp--;
+
 
               createParticles(
                 enemy.x,
@@ -1041,253 +1946,449 @@
                 3
               );
 
-              if (enemy.hp <= 0) {
-                score += enemy.value;
+
+              if (
+                enemy.hp <=
+                0
+              ) {
+
+                score +=
+                  enemy.value;
+
+
                 kills++;
+
 
                 createParticles(
                   enemy.x,
                   enemy.y,
-                  enemy.type === "boss"
+
+                  enemy.type ===
+                    "boss"
                     ? 50
                     : 18
                 );
+
 
                 enemies.splice(
                   enemyIndex,
                   1
                 );
 
+
                 updateHud();
 
-                if (score >= CLEAR_SCORE) {
-                  clearGame();
-                  return;
-                }
               }
 
+
               break;
+
             }
+
           }
 
-          if (!enemies[enemyIndex]) {
-            continue;
-          }
 
           if (
-            enemy.y - enemy.radius >
+            !enemies[
+              enemyIndex
+            ]
+          ) {
+
+            continue;
+
+          }
+
+
+          /*
+            敵が下へ抜けても
+            ダメージは受けない
+          */
+          if (
+            enemy.y -
+            enemy.radius >
             H + 20
           ) {
+
             enemies.splice(
               enemyIndex,
               1
             );
+
             continue;
+
           }
 
+
+          /*
+            自機と敵本体の当たり判定
+            見た目より小さめ
+          */
           const playerHitRadius =
-            player.radius * 0.4;
+            player.radius *
+            0.4;
+
 
           const enemyHitRadius =
             enemy.radius *
             (
-              enemy.type === "boss"
+              enemy.type ===
+                "boss"
                 ? 0.66
                 : 0.56
             );
+
 
           if (
             circleCollision(
               player.x,
               player.y,
               playerHitRadius,
+
               enemy.x,
               enemy.y,
               enemyHitRadius
             )
           ) {
+
             enemies.splice(
               enemyIndex,
               1
             );
 
+
             damagePlayer();
+
           }
+
         }
 
-      for (
-        let bulletIndex = bullets.length - 1;
-        bulletIndex >= 0;
-        bulletIndex--
-      ) {
-        const bullet = bullets[bulletIndex];
 
-        if (!bullet) {
-          continue;
-        }
+        /*
+          敵弾と自機の当たり判定
 
-        if (
-          circleCollision(
-            player.x,
-            player.y,
-            player.radius * 0.36,
-            bullet.x,
-            bullet.y,
-            bullet.radius * 0.52
-          )
+          被弾するとdamagePlayer内でbullets配列が
+          作り直されるため、被弾したらbreakして
+          このフレームの判定を終了する。
+          これにより被弾時のフリーズを防止。
+        */
+        for (
+          let bulletIndex =
+            bullets.length - 1;
+
+          bulletIndex >= 0;
+
+          bulletIndex--
         ) {
-          bullets.splice(
-            bulletIndex,
-            1
-          );
 
-          damagePlayer();
+          const bullet =
+            bullets[
+              bulletIndex
+            ];
 
-          /*
-            damagePlayer内で敵弾配列が更新されるため、
-            このフレームの衝突判定をここで終了する
-          */
-          break;
+
+          if (!bullet) {
+            continue;
+          }
+
+
+          if (
+            circleCollision(
+              player.x,
+              player.y,
+              player.radius *
+              0.36,
+
+              bullet.x,
+              bullet.y,
+              bullet.radius *
+              0.52
+            )
+          ) {
+
+            bullets.splice(
+              bulletIndex,
+              1
+            );
+
+
+            damagePlayer();
+
+
+            break;
+
+          }
+
         }
-      }
+
 
         updateHud();
+
       }
 
+
       function drawBackground() {
-        const gradient = ctx.createLinearGradient(
-          0,
-          0,
-          0,
-          H
-        );
+
+        const gradient =
+          ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            H
+          );
+
 
         gradient.addColorStop(
           0,
           "#07375b"
         );
 
+
         gradient.addColorStop(
           0.55,
           "#041b31"
         );
+
 
         gradient.addColorStop(
           1,
           "#01050b"
         );
 
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, W, H);
+
+        ctx.fillStyle =
+          gradient;
+
+
+        ctx.fillRect(
+          0,
+          0,
+          W,
+          H
+        );
+
 
         ctx.fillStyle =
           "rgba(80, 200, 225, 0.07)";
 
+
         ctx.beginPath();
-        ctx.moveTo(80, 0);
-        ctx.lineTo(220, 0);
-        ctx.lineTo(470, H);
-        ctx.lineTo(290, H);
+
+        ctx.moveTo(
+          80,
+          0
+        );
+
+        ctx.lineTo(
+          220,
+          0
+        );
+
+        ctx.lineTo(
+          470,
+          H
+        );
+
+        ctx.lineTo(
+          290,
+          H
+        );
+
         ctx.closePath();
+
         ctx.fill();
 
-        bubbles.forEach(bubble => {
-          ctx.strokeStyle =
-            "rgba(190, 235, 255, " +
-            bubble.alpha +
-            ")";
 
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(
-            bubble.x,
-            bubble.y,
-            bubble.radius,
-            0,
-            Math.PI * 2
-          );
-          ctx.stroke();
-        });
+        bubbles.forEach(
+          bubble => {
+
+            ctx.strokeStyle =
+              "rgba(190, 235, 255, " +
+              bubble.alpha +
+              ")";
+
+
+            ctx.lineWidth =
+              2;
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+              bubble.x,
+              bubble.y,
+              bubble.radius,
+              0,
+              Math.PI *
+              2
+            );
+
+
+            ctx.stroke();
+
+          }
+        );
+
 
         ctx.fillStyle =
           "rgba(4, 24, 25, 0.88)";
 
-        for (let x = 0; x < W; x += 55) {
+
+        for (
+          let x = 0;
+          x < W;
+          x += 55
+        ) {
+
           const height =
             25 +
-            Math.sin(x * 0.08) *
+            Math.sin(
+              x *
+              0.08
+            ) *
             14;
 
+
           ctx.beginPath();
-          ctx.moveTo(x, H);
+
+
+          ctx.moveTo(
+            x,
+            H
+          );
+
+
           ctx.quadraticCurveTo(
             x + 20,
-            H - height,
+            H -
+            height,
             x + 38,
             H
           );
+
+
           ctx.closePath();
+
           ctx.fill();
+
         }
+
       }
 
+
       function drawCrab() {
+
         if (
-          player.invincible > 0 &&
+          player.invincible >
+            0 &&
           Math.floor(
-            player.invincible * 14
-          ) % 2 === 0
+            player.invincible *
+            14
+          ) %
+            2 ===
+            0
         ) {
+
           return;
+
         }
 
+
         ctx.save();
+
+
         ctx.translate(
           player.x,
           player.y
         );
 
-        ctx.strokeStyle = "#ff7048";
-        ctx.lineWidth = 11;
-        ctx.lineCap = "round";
 
-        [-1, 1].forEach(side => {
-          ctx.beginPath();
-          ctx.moveTo(
-            side * 25,
-            8
-          );
-          ctx.lineTo(
-            side * 55,
-            27
-          );
-          ctx.stroke();
+        ctx.strokeStyle =
+          "#ff7048";
 
-          ctx.beginPath();
-          ctx.moveTo(
-            side * 28,
-            -5
-          );
-          ctx.lineTo(
-            side * 57,
-            -29
-          );
-          ctx.stroke();
 
-          ctx.fillStyle = "#ff9960";
-          ctx.beginPath();
-          ctx.arc(
-            side * 64,
-            -34,
-            14,
-            0,
-            Math.PI * 2
-          );
-          ctx.fill();
-        });
+        ctx.lineWidth =
+          11;
 
-        ctx.fillStyle = "#e9573d";
+
+        ctx.lineCap =
+          "round";
+
+
+        [-1, 1].forEach(
+          side => {
+
+            ctx.beginPath();
+
+
+            ctx.moveTo(
+              side *
+              25,
+              8
+            );
+
+
+            ctx.lineTo(
+              side *
+              55,
+              27
+            );
+
+
+            ctx.stroke();
+
+
+            ctx.beginPath();
+
+
+            ctx.moveTo(
+              side *
+              28,
+              -5
+            );
+
+
+            ctx.lineTo(
+              side *
+              57,
+              -29
+            );
+
+
+            ctx.stroke();
+
+
+            ctx.fillStyle =
+              "#ff9960";
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+              side *
+              64,
+              -34,
+              14,
+              0,
+              Math.PI *
+              2
+            );
+
+
+            ctx.fill();
+
+          }
+        );
+
+
+        ctx.fillStyle =
+          "#e9573d";
+
+
         ctx.beginPath();
+
+
         ctx.ellipse(
           0,
           7,
@@ -1295,12 +2396,21 @@
           33,
           0,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
 
-        ctx.fillStyle = "#ff9160";
+
+        ctx.fillStyle =
+          "#ff9160";
+
+
         ctx.beginPath();
+
+
         ctx.ellipse(
           0,
           1,
@@ -1308,78 +2418,157 @@
           22,
           0,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
 
-        ctx.strokeStyle = "#ffad72";
-        ctx.lineWidth = 6;
+
+        ctx.strokeStyle =
+          "#ffad72";
+
+
+        ctx.lineWidth =
+          6;
+
+
         ctx.beginPath();
-        ctx.moveTo(-17, -20);
-        ctx.lineTo(-17, -40);
-        ctx.moveTo(17, -20);
-        ctx.lineTo(17, -40);
+
+
+        ctx.moveTo(
+          -17,
+          -20
+        );
+
+
+        ctx.lineTo(
+          -17,
+          -40
+        );
+
+
+        ctx.moveTo(
+          17,
+          -20
+        );
+
+
+        ctx.lineTo(
+          17,
+          -40
+        );
+
+
         ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
+
+        ctx.fillStyle =
+          "#ffffff";
+
+
         ctx.beginPath();
+
+
         ctx.arc(
           -17,
           -43,
           9,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.arc(
           17,
           -43,
           9,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
 
-        ctx.fillStyle = "#111111";
+
+        ctx.fillStyle =
+          "#111111";
+
+
         ctx.beginPath();
+
+
         ctx.arc(
           -15,
           -44,
           4,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.arc(
           19,
           -44,
           4,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
 
+
         ctx.restore();
+
       }
 
-      function drawEnemy(enemy) {
+
+      function drawEnemy(
+        enemy
+      ) {
+
         ctx.save();
+
+
         ctx.translate(
           enemy.x,
           enemy.y
         );
 
+
         const color =
-          enemy.type === "boss"
+          enemy.type ===
+            "boss"
             ? "#d95cff"
-            : enemy.type === "charger"
+
+            : enemy.type ===
+                "charger"
               ? "#ff455f"
-              : enemy.type === "gunner"
+
+              : enemy.type ===
+                  "gunner"
                 ? "#ff9a52"
+
                 : "#62d2e5";
 
-        ctx.fillStyle = color;
-        ctx.globalAlpha = 0.9;
+
+        ctx.fillStyle =
+          color;
+
+
+        ctx.globalAlpha =
+          0.9;
+
 
         ctx.beginPath();
+
+
         ctx.arc(
           0,
           0,
@@ -1388,221 +2577,412 @@
           0
         );
 
+
         ctx.quadraticCurveTo(
-          enemy.radius * 0.65,
-          enemy.radius * 0.65,
-          enemy.radius * 0.3,
-          enemy.radius * 0.25
+          enemy.radius *
+          0.65,
+
+          enemy.radius *
+          0.65,
+
+          enemy.radius *
+          0.3,
+
+          enemy.radius *
+          0.25
         );
+
 
         ctx.quadraticCurveTo(
           0,
-          enemy.radius * 0.8,
-          -enemy.radius * 0.3,
-          enemy.radius * 0.25
+
+          enemy.radius *
+          0.8,
+
+          -enemy.radius *
+          0.3,
+
+          enemy.radius *
+          0.25
         );
 
+
         ctx.quadraticCurveTo(
-          -enemy.radius * 0.65,
-          enemy.radius * 0.65,
+          -enemy.radius *
+          0.65,
+
+          enemy.radius *
+          0.65,
+
           -enemy.radius,
+
           0
         );
 
+
         ctx.fill();
 
-        ctx.strokeStyle = color;
+
+        ctx.strokeStyle =
+          color;
+
+
         ctx.lineWidth =
-          enemy.type === "boss"
+          enemy.type ===
+            "boss"
             ? 10
             : 7;
 
-        ctx.lineCap = "round";
 
-        for (let i = -2; i <= 2; i++) {
+        ctx.lineCap =
+          "round";
+
+
+        for (
+          let i = -2;
+          i <= 2;
+          i++
+        ) {
+
           ctx.beginPath();
 
+
           ctx.moveTo(
-            i * enemy.radius * 0.28,
-            enemy.radius * 0.15
+            i *
+            enemy.radius *
+            0.28,
+
+            enemy.radius *
+            0.15
           );
+
 
           ctx.quadraticCurveTo(
-            i * enemy.radius * 0.4 +
-              Math.sin(
-                enemy.phase + i
-              ) *
-              11,
-            enemy.radius * 0.9,
-            i * enemy.radius * 0.24,
-            enemy.radius * 1.25
+            i *
+            enemy.radius *
+            0.4 +
+            Math.sin(
+              enemy.phase +
+              i
+            ) *
+            11,
+
+            enemy.radius *
+            0.9,
+
+            i *
+            enemy.radius *
+            0.24,
+
+            enemy.radius *
+            1.25
           );
 
+
           ctx.stroke();
+
         }
 
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = "#14202a";
+
+        ctx.globalAlpha =
+          1;
+
+
+        ctx.fillStyle =
+          "#14202a";
+
 
         ctx.beginPath();
-        ctx.arc(
-          -enemy.radius * 0.27,
-          -3,
-          5,
-          0,
-          Math.PI * 2
-        );
+
 
         ctx.arc(
-          enemy.radius * 0.27,
+          -enemy.radius *
+          0.27,
           -3,
           5,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
+        ctx.arc(
+          enemy.radius *
+          0.27,
+          -3,
+          5,
+          0,
+          Math.PI *
+          2
+        );
+
 
         ctx.fill();
 
-        if (enemy.type === "boss") {
+
+        if (
+          enemy.type ===
+          "boss"
+        ) {
+
           ctx.fillStyle =
             "rgba(0, 0, 0, 0.5)";
 
+
           ctx.fillRect(
             -70,
-            -enemy.radius - 24,
+            -enemy.radius -
+            24,
             140,
             9
           );
 
-          ctx.fillStyle = "#ff6c88";
+
+          ctx.fillStyle =
+            "#ff6c88";
+
 
           ctx.fillRect(
             -70,
-            -enemy.radius - 24,
+            -enemy.radius -
+            24,
+
             140 *
-              Math.max(
-                0,
-                enemy.hp / enemy.maxHp
-              ),
+            Math.max(
+              0,
+              enemy.hp /
+              enemy.maxHp
+            ),
+
             9
           );
+
         }
 
+
         ctx.restore();
+
       }
 
-      function drawBeam(beam) {
+
+      function drawBeam(
+        beam
+      ) {
+
         const gradient =
           ctx.createLinearGradient(
-            beam.x - 25,
+            beam.x -
+            25,
             0,
-            beam.x + 25,
+
+            beam.x +
+            25,
             0
           );
+
 
         gradient.addColorStop(
           0,
           "rgba(255, 235, 70, 0)"
         );
+
 
         gradient.addColorStop(
           0.5,
           "rgba(255, 255, 195, 1)"
         );
 
+
         gradient.addColorStop(
           1,
           "rgba(255, 235, 70, 0)"
         );
 
-        ctx.fillStyle = gradient;
+
+        ctx.fillStyle =
+          gradient;
+
 
         ctx.fillRect(
-          beam.x - beam.width * 1.7,
-          beam.y - beam.height,
-          beam.width * 3.4,
+          beam.x -
+          beam.width *
+          1.7,
+
+          beam.y -
+          beam.height,
+
+          beam.width *
+          3.4,
+
           beam.height
         );
 
-        ctx.fillStyle = "#ffffff";
+
+        ctx.fillStyle =
+          "#ffffff";
+
 
         ctx.fillRect(
-          beam.x - 3,
-          beam.y - beam.height,
+          beam.x -
+          3,
+
+          beam.y -
+          beam.height,
+
           6,
+
           beam.height
         );
+
       }
 
-      function drawBullet(bullet) {
-        ctx.fillStyle = "#ff4568";
+
+      function drawBullet(
+        bullet
+      ) {
+
+        ctx.fillStyle =
+          "#ff4568";
+
 
         ctx.beginPath();
+
+
         ctx.arc(
           bullet.x,
           bullet.y,
           bullet.radius,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
+
 
         ctx.strokeStyle =
           "rgba(255, 255, 255, 0.75)";
 
-        ctx.lineWidth = 2;
+
+        ctx.lineWidth =
+          2;
+
+
         ctx.stroke();
+
       }
 
-      function drawParticle(particle) {
-        ctx.globalAlpha = Math.min(
-          1,
-          particle.life * 3
-        );
 
-        ctx.fillStyle = "#ffd067";
+      function drawParticle(
+        particle
+      ) {
+
+        ctx.globalAlpha =
+          Math.min(
+            1,
+            particle.life *
+            3
+          );
+
+
+        ctx.fillStyle =
+          "#ffd067";
+
 
         ctx.beginPath();
+
+
         ctx.arc(
           particle.x,
           particle.y,
           particle.size,
           0,
-          Math.PI * 2
+          Math.PI *
+          2
         );
+
+
         ctx.fill();
+
       }
 
+
       function drawGame() {
+
         ctx.save();
 
-        if (shakeTimer > 0) {
+
+        if (
+          shakeTimer >
+          0
+        ) {
+
           ctx.translate(
-            (Math.random() - 0.5) * 18,
-            (Math.random() - 0.5) * 18
+            (
+              Math.random() -
+              0.5
+            ) *
+            18,
+
+            (
+              Math.random() -
+              0.5
+            ) *
+            18
           );
+
         }
+
 
         drawBackground();
 
-        beams.forEach(drawBeam);
-        enemies.forEach(drawEnemy);
-        bullets.forEach(drawBullet);
-        particles.forEach(drawParticle);
 
-        ctx.globalAlpha = 1;
+        beams.forEach(
+          drawBeam
+        );
+
+
+        enemies.forEach(
+          drawEnemy
+        );
+
+
+        bullets.forEach(
+          drawBullet
+        );
+
+
+        particles.forEach(
+          drawParticle
+        );
+
+
+        ctx.globalAlpha =
+          1;
+
 
         if (player) {
+
           drawCrab();
+
         }
+
 
         ctx.restore();
 
-        if (flashTimer > 0) {
+
+        if (
+          flashTimer >
+          0
+        ) {
+
           ctx.fillStyle =
             "rgba(255, 30, 55, " +
-            flashTimer * 1.9 +
+            flashTimer *
+            1.9 +
             ")";
+
 
           ctx.fillRect(
             0,
@@ -1610,69 +2990,122 @@
             W,
             H
           );
+
         }
+
       }
 
-      function gameLoop(now) {
-        const dt = Math.min(
-          0.032,
-          (now - lastTime) / 1000
-        );
 
-        lastTime = now;
+      function gameLoop(
+        now
+      ) {
 
-        if (running) {
-          update(dt);
+        const dt =
+          Math.min(
+            0.032,
+
+            (
+              now -
+              lastTime
+            ) /
+            1000
+          );
+
+
+        lastTime =
+          now;
+
+
+        if (
+          running
+        ) {
+
+          update(
+            dt
+          );
+
         }
+
 
         drawGame();
 
-        if (running) {
+
+        if (
+          running
+        ) {
+
           animationId =
             requestAnimationFrame(
               gameLoop
             );
+
         } else {
-          animationId = null;
+
+          animationId =
+            null;
+
         }
+
       }
 
+
       resetGame();
+
       drawGame();
+
 
       requestAnimationFrame(
         resetStickVisual
       );
 
+
+      /*
+        iPhoneの長押しメニューなどを抑制
+      */
       document.addEventListener(
         "contextmenu",
         event => {
+
           event.preventDefault();
+
         }
       );
+
 
       document.addEventListener(
         "gesturestart",
         event => {
+
           event.preventDefault();
+
         }
       );
+
 
       document.addEventListener(
         "touchmove",
         event => {
+
           if (
-            event.target === canvas ||
-            stickBase.contains(event.target)
+            event.target ===
+              canvas ||
+            stickBase.contains(
+              event.target
+            )
           ) {
+
             event.preventDefault();
+
           }
+
         },
         {
           passive: false
         }
       );
+
     })();
   </script>
+
 </body>
 </html>
